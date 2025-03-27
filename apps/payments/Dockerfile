@@ -4,12 +4,17 @@ WORKDIR /usr/src/app
 
 COPY package.json ./
 COPY package-lock.json ./
+COPY tsconfig.json tsconfig.json
+COPY nest-cli.json nest-cli.json
 
-RUN npm install
+COPY apps/payments apps/payments
+COPY libs libs
 
-COPY . .
+RUN npm install -g npm@latest
 
-RUN npm run build
+RUN npm install --force
+
+RUN npm run build payments
 
 FROM node:alpine As production
 
@@ -26,5 +31,6 @@ RUN npm install
 RUN npm install --prod
 
 COPY --from=development /usr/src/app/dist ./dist
+COPY proto proto
 
 CMD ["node", "dist/apps/payments/main"]

@@ -5,8 +5,10 @@ services:
       dockerfile: ./apps/reservations/Dockerfile
       target: development
     command: npm run start:dev reservations
+    env_file:
+      - ./apps/reservations/.env
     ports:
-      - '3001:3001'
+      - '3005:3005'
     volumes:
       - .:/usr/src/app
   auth:
@@ -15,6 +17,8 @@ services:
       dockerfile: ./apps/auth/Dockerfile
       target: development
     command: npm run start:dev auth
+    env_file:
+      - ./apps/auth/.env
     ports:
       - '3002:3002'
     volumes:
@@ -25,7 +29,44 @@ services:
       dockerfile: ./apps/payments/Dockerfile
       target: development
     command: npm run start:dev payments
-    ports:
-      - '3003:3003'
+    env_file:
+      - ./apps/payments/.env
     volumes:
       - .:/usr/src/app
+  notifications:
+    build:
+      context: .
+      dockerfile: ./apps/notifications/Dockerfile
+      target: development
+    command: npm run start:dev notifications
+    env_file:
+      - ./apps/notifications/.env
+    volumes:
+      - .:/usr/src/app
+  #  mysql:
+  #    image: mysql
+  #    env_file:
+  #      - .env
+  #    ports:
+  #      - '3306:3306'
+  rabbitmq:
+    image: 'rabbitmq:3-management'
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+  redis:
+    image: 'redis'
+    ports:
+      - '6379:6379'
+#  gateway:
+#    build:
+#      context: .
+#      dockerfile: ./apps/gateway/Dockerfile
+#      target: development
+#    command: npm run start:dev gateway
+#    env_file:
+#      - ./apps/gateway/.env
+#    volumes:
+#      - .:/usr/src/app
+#    ports:
+#      - '3004:3004'

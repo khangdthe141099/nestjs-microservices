@@ -8,12 +8,14 @@ import {
 
 @Module({
   imports: [
+    // [MONGO DB]
     MongooseModule.forRootAsync({
       useFactory: (configService: ConfigService) => ({
         uri: configService.get('MONGO_URL'),
       }),
       inject: [ConfigService],
     }),
+
     ConfigModule.forRoot({
       isGlobal: true,
     }),

@@ -26,6 +26,24 @@
         "tsConfigPath": "libs/common/tsconfig.lib.json"
       }
     },
+    "gateway": {
+      "type": "application",
+      "root": "apps/gateway",
+      "entryFile": "main",
+      "sourceRoot": "apps/gateway/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/gateway/tsconfig.app.json"
+      }
+    },
+    "notifications": {
+      "type": "application",
+      "root": "apps/notifications",
+      "entryFile": "main",
+      "sourceRoot": "apps/notifications/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/notifications/tsconfig.app.json"
+      }
+    },
     "payments": {
       "type": "application",
       "root": "apps/payments",
@@ -42,6 +60,15 @@
       "sourceRoot": "apps/reservations/src",
       "compilerOptions": {
         "tsConfigPath": "apps/reservations/tsconfig.app.json"
+      }
+    },
+    "typeorm": {
+      "type": "application",
+      "root": "apps/typeorm",
+      "entryFile": "main",
+      "sourceRoot": "apps/typeorm/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/typeorm/tsconfig.app.json"
       }
     }
   },
